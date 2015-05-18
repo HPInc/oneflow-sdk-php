@@ -65,7 +65,7 @@ class OneFlowComponent extends OneFlowBase	{
 	 * setFetch function.
 	 *
 	 * @access public
-	 * @param mixed code
+	 * @param bool $fetch
 	 * @return void
 	 */
 	public function setFetch($fetch)	{

@@ -15,12 +15,9 @@ class OneFlowCarrier extends OneFlowBase {
 	 */
 	public function init()      {
 	  
-		$this->__addProperty("accountNumber");
-		$this->__addProperty("accountExtra");
 		$this->__addProperty("code");
 		$this->__addProperty("service");
-		$this->__addProperty("pickupType");
-		$this->__addProperty("packageType");
+		$this->__addProperty("alias");
 	}	
 }
 
