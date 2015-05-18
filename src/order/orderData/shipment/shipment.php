@@ -140,6 +140,18 @@ class OneFlowShipment extends OneFlowBase {
 	}
 
 	/**
+	 * setCarrierByAlias function.
+	 *
+	 * @access public
+	 * @param mixed $code
+	 * @param mixed $service
+	 * @return void
+	 */
+	public function setCarrierByAlias($alias)      {
+		$this->carrier->alias = $alias;
+	}
+
+	/**
 	 * setLabelName function.
 	 *
 	 * @access public
