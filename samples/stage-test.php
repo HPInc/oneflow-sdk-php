@@ -70,8 +70,7 @@ $item = $orderData->newSKUItem($skuCode, $itemId, $quantity);
 
 //ADD THE COMPONENT AND FILENAME
 $component = $item->newComponent($componentCode);
-$component->setPath($localPath);	//this would be a URL for fetch files
-$component->setFetch(false);		//set to true for fetch or false for upload
+$component->setUploadFile($localPath);
 
 //SUBMIT THE ORDER
 $order->setOrderData($orderData);
