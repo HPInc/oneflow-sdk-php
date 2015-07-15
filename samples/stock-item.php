@@ -32,10 +32,13 @@ $shipment->setCarrier("CARRIER-CODE","CARRIER-SERVICE");
 $item = $orderData->newSKUItem("YOUR-SKU-CODE", "YOUR-ITEM-ID", QUANTITY);
 $item->setShipment($shipment);
 
-//ADD THE COMPONENT AND FILENAME
+//ADD THE COMPONENT  
 $component = $item->newComponent("COMPONENT-CODE");
-$component->setPath($localPath);	//this would be a URL for fetch files
-$component->setFetch(true);					//set to true for fetch or false for upload
+
+// SET THE COMPONENT FILE SOURCE (fetch, upload or local)
+$component->setFetchUrl("http://site.com/file.pdf"); // to tell OneFlow to fetch a file -OR- 
+$component->setUploadFile("upload-file.pdf");        // to upload a file straight to OneFlow -OR- 
+$component->setLocalPath("local-file.pdf");          // to use local files (not uploaded)
 
 //CREATE A STOCK ITEM
 $stockItem = $orderData->newStockItem("YOUR-STOCK-CODE", QUANTITY);
