@@ -73,20 +73,65 @@ class OneFlowComponent extends OneFlowBase	{
 		$this->fetch = $fetch;
 	}
 
+
+	/**
+	 * setUploadFile function.
+	 *
+	 * @access public
+	 * @param bool $fetch
+	 * @return void
+	 */
+	public function setUploadFile($localPath)	{
+
+		$this->fetch = false;
+		$this->localFile = false;
+		$this->path = $localPath;
+	}
+
+	/**
+	 * setFetchUrl function.
+	 *
+	 * @access public
+	 * @param bool $fetch
+	 * @return void
+	 */
+	public function setFetchUrl($fetchUrl)	{
+
+		$this->fetch = true;
+		$this->localFile = false;
+		$this->path = $fetchUrl;
+	}
+
+	/**
+	 * setLocalPath function.
+	 *
+	 * @access public
+	 * @param mixed $path
+	 * @return void
+	 */
+	public function setLocalPath($path){
+
+		$this->fetch = false;
+		$this->localFile = true;
+		$this->path = basename($path);
+
+		global $OneFlowFilenames;
+		$OneFlowFilenames[] = $path;
+	}
+
+
 	/**
 	 * setPath function.
 	 *
 	 * @access public
 	 * @param mixed $path
-	 * @param bool $fetch (default: false)
 	 * @return void
 	 */
-	public function setPath($path, $fetch=false){
+	public function setPath($path){
 
 		global $OneFlowFilenames;
 
-		$this->fetch = $fetch;
-		if ($fetch)	{
+		if ($this->fetch)	{
 			$this->path = $path;
 		}	else	{
 			$this->path = basename($path);
