@@ -116,6 +116,8 @@ class OneFlowShipment extends OneFlowBase {
 
 		$this->__addObject("returnAddress","Address");
 
+		$this->returnAddress->name = $name;
+		$this->returnAddress->companyName = $companyName;
 		$this->returnAddress->address1 = $address1;
 		$this->returnAddress->address2 = $address2;
 		$this->returnAddress->address3 = $address3;
