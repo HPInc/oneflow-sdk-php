@@ -125,7 +125,6 @@ class OneFlowShipment extends OneFlowBase {
 		$this->returnAddress->state = $state;
 		$this->returnAddress->isoCountry = $isoCountry;
 		$this->returnAddress->postcode = $postcode;
-		$this->returnAddress->country = $country;
 
 	}
 
