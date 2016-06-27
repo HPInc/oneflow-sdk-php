@@ -1,0 +1,16 @@
+{
+  "name": "oneflow/php-sdk",
+  "description": "PHP SDK for OneFlow",
+  "minimum-stability": "stable",
+  "license": "OneFlow Master",
+  "homepage": "http://www.oneflowsystems.com/",
+  "authors": [
+    {
+      "name": "Nigel Watson",
+      "email": "nigel.watson@oneflowsystems.com"
+    }
+  ],
+  "autoload": {
+    "files": ["src/OneflowSDK.php", "src/ProductionSDK.php"]
+  }
+}
