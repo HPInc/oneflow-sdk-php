@@ -1,5 +1,8 @@
 <?php
-require_once 'OneFlowSDK.php';
+
+if (!class_exists('OneflowSDK')) {
+	require_once 'OneFlowSDK.php';
+}
 
 class ProductionSDK extends OneflowSDK	{
 
