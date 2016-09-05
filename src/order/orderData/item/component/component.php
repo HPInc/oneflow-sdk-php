@@ -30,11 +30,13 @@ class OneFlowComponent extends OneFlowBase	{
 		$this->__addProperty("localFile", false);
 		$this->__addProperty("preflight");
 		$this->__addProperty("preflightProfile");
+		$this->__addProperty("preflightProfileId");
 		$this->__addProperty("paper", "", false);
 		$this->__addProperty("weight", "", false);
 		$this->__addProperty("pages", "", false);
 		$this->__addProperty("width", "", false);
 		$this->__addProperty("height", "", false);
+		$this->__addArray("attributes", "String");
     }
 
 	/**
@@ -238,11 +240,23 @@ class OneFlowComponent extends OneFlowBase	{
 	 * setPreflightProfile function.
 	 *
 	 * @access public
-	 * @param string $preflightProfile (default: "x4pdf")
+	 * @param string $preflightProfile (default: "pdfx4")
 	 * @return void
 	 */
-	public function setPreflightProfile($preflightProfile="x4pdf")	{
+	public function setPreflightProfile($preflightProfile="pdfx4")	{
 		$this->preflightProfile = $preflightProfile;
+	}
+
+	/**
+	 * setPreflightProfileId function.
+	 *
+	 * @access public
+	 * @param string $preflightProfileId
+	 * @return void
+	 */
+	public function setPreflightProfileId($preflightProfileId)	{
+		$this->preflightProfileId = $preflightProfileId;
+        if ($preflightProfileId) $this->setPreflightProfile("custom");
 	}
 
     /**
@@ -269,6 +283,18 @@ class OneFlowComponent extends OneFlowBase	{
     public function setComponentId($componentId)	{
 
 	    $this->componentId = $componentId;
+    }
+
+    /**
+     * addAttribute function.
+     *
+     * @access public
+     * @param $name
+     * @param $value
+     * @return void
+     */
+    public function addAttribute($name, $value = null)	{
+	    $this->attributes[$name] = $value;
     }
 
 }
