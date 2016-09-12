@@ -55,7 +55,7 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * newItem function.
 	 *
 	 * @access public
-	 * @return void
+	 * @return OneFlowItem
 	 */
 	public function newItem()	{
 		$this->items[] = new OneFlowItem();
@@ -69,10 +69,9 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * @param mixed $skuCode
 	 * @param mixed $sourceItemId
 	 * @param mixed $quantity
-	 * @return void
+	 * @return OneFlowItem
 	 */
 	public function newSKUItem($skuCode, $sourceItemId, $quantity)	{
-
 		$item = new OneFlowItem();
 		$item->setSourceItemId($sourceItemId);
 		$item->setQuantity($quantity);
@@ -89,10 +88,9 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * @param mixed $stockCode
 	 * @param mixed $quantity
 	 * @param mixed $shipmentIndex
-	 * @return void
+	 * @return OneFlowStockItem
 	 */
 	public function newStockItem($stockCode, $quantity)	{
-
 		$stockItem = new OneFlowStockItem();
 		$stockItem->setCode($stockCode);
 		$stockItem->setQuantity($quantity);
@@ -105,10 +103,9 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * newShipment function.
 	 *
 	 * @access public
-	 * @return void
+	 * @return OneFlowShipment
 	 */
 	public function newShipment()	{
-
 		$count = count($this->shipments);
 
 		$this->shipments[$count] = new OneFlowShipment();
@@ -121,7 +118,7 @@ class OneFlowOrderData extends OneFlowBase	{
 	 *
 	 * @access public
 	 * @param mixed $printType
-	 * @return void
+	 * @return boolean
 	 */
 	public function setPrintType($printType)	{
 		if (in_array($printType, $this->$printTypes))	{
@@ -212,8 +209,6 @@ class OneFlowOrderData extends OneFlowBase	{
 	public function setPostbackMethod($postbackMethod)	{
 		$this->postbackMethod = $postbackMethod;
 	}
-
-
 }
 
 ?>
