@@ -36,7 +36,7 @@ class OneFlowComponent extends OneFlowBase	{
 		$this->__addProperty("pages", "", false);
 		$this->__addProperty("width", "", false);
 		$this->__addProperty("height", "", false);
-		$this->__addArray("attributes", "String");
+		$this->__addArray("attributes", null);
     }
 
 	/**
