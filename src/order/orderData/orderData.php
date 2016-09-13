@@ -34,8 +34,6 @@ class OneFlowOrderData extends OneFlowBase	{
 		$this->__addProperty("inqueue");
 		$this->__addProperty("counter");
 		$this->__addProperty("slaTimestamp");
-		$this->__addProperty("postbackAddress");
-		$this->__addProperty("postbackMethod");
 		$this->__addProperty("date");
 		$this->__addProperty("clientTimeZoneMinuts");
 		$this->__addProperty("email","");
@@ -190,30 +188,6 @@ class OneFlowOrderData extends OneFlowBase	{
 	public function setEmail($email)	{
 		$this->email = $email;
 	}
-
-	/**
-	 * setPostbackAddress function.
-	 *
-	 * @access public
-	 * @param mixed $postbackAddress
-	 * @return void
-	 */
-	public function setPostbackAddress($postbackAddress)	{
-		$this->postbackAddress = $postbackAddress;
-	}
-
-	/**
-	 * setPostbackURL function.
-	 *
-	 * @access public
-	 * @param mixed $postbackMethod
-	 * @return void
-	 */
-	public function setPostbackMethod($postbackMethod)	{
-		$this->postbackMethod = $postbackMethod;
-	}
-
-
 }
 
 ?>
