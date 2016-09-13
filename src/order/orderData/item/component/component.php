@@ -17,11 +17,7 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function init()      {
-
-//		$this->__addList("type", Array("press", "text", "cover", "banner", "insert", "stock"));
-
 		$this->__addProperty("componentId");
-//		$this->__addProperty("type", "press", true);
 		$this->__addProperty("type");
 		$this->__addProperty("code");
 		$this->__addProperty("path");
@@ -47,7 +43,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setType($type)	{
-
 		$this->type = $type;
 	}
 
@@ -55,11 +50,10 @@ class OneFlowComponent extends OneFlowBase	{
 	 * setCode function.
 	 *
 	 * @access public
-	 * @param mixed code
+	 * @param mixed $code
 	 * @return void
 	 */
 	public function setCode($code)	{
-
 		$this->code = $code;
 	}
 
@@ -71,7 +65,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setFetch($fetch)	{
-
 		$this->fetch = $fetch;
 	}
 
@@ -80,11 +73,10 @@ class OneFlowComponent extends OneFlowBase	{
 	 * setUploadFile function.
 	 *
 	 * @access public
-	 * @param bool $fetch
+	 * @param string $localPath
 	 * @return void
 	 */
 	public function setUploadFile($localPath)	{
-
 		$this->fetch = false;
 		$this->localFile = false;
 		$this->path = $localPath;
@@ -94,11 +86,10 @@ class OneFlowComponent extends OneFlowBase	{
 	 * setFetchUrl function.
 	 *
 	 * @access public
-	 * @param bool $fetch
+	 * @param string $fetchUrl
 	 * @return void
 	 */
 	public function setFetchUrl($fetchUrl)	{
-
 		$this->fetch = true;
 		$this->localFile = false;
 		$this->path = $fetchUrl;
@@ -112,7 +103,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setLocalPath($path){
-
 		$this->fetch = false;
 		$this->localFile = true;
 		$this->path = basename($path);
@@ -130,7 +120,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setPath($path){
-
 		global $OneFlowFilenames;
 
 		if ($this->fetch)	{
@@ -150,7 +139,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setBarcode($barcode)	{
-
 		$this->barcode = $barcode;
 	}
 
@@ -163,7 +151,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setPaper($paper, $weight)	{
-
 		$this->paper = $paper;
 		$this->weight = $weight;
 	}
@@ -176,7 +163,6 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setPages($pages)	{
-
 		$this->pages = $pages;
 	}
 
@@ -189,10 +175,9 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setFinish($side1="none", $side2="none")	{
-
 		$this->__addObject("finish", "Finish");
 		$this->finish->side1 = $side1;
-		$this->finish->side1 = $side1;
+		$this->finish->side2 = $side2;
 	}
 
 	/**
@@ -204,10 +189,9 @@ class OneFlowComponent extends OneFlowBase	{
 	 * @return void
 	 */
 	public function setColour($side1="none", $side2="none")	{
-
 		$this->__addObject("colour", "Colour");
 		$this->colour->side1 = $side1;
-		$this->colour->side1 = $side1;
+		$this->colour->side2 = $side2;
 	}
 
 	/**
@@ -268,7 +252,6 @@ class OneFlowComponent extends OneFlowBase	{
      * @return void
      */
     public function setSize($width, $height)	{
-
 	    $this->width = $width;
 	    $this->height = $height;
     }
@@ -281,7 +264,6 @@ class OneFlowComponent extends OneFlowBase	{
      * @return void
      */
     public function setComponentId($componentId)	{
-
 	    $this->componentId = $componentId;
     }
 
@@ -296,7 +278,6 @@ class OneFlowComponent extends OneFlowBase	{
     public function addAttribute($name, $value = null)	{
 	    $this->attributes[$name] = $value;
     }
-
 }
 
 ?>
