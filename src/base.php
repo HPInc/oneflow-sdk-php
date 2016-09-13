@@ -9,7 +9,7 @@ $OneFlowFilenames = Array();
  * OneFlow class.
  */
 class OneFlow {
-	
+
 }
 
 /**
@@ -24,31 +24,29 @@ class OneFlowBase	{
 
 	/**
 	 * __construct function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $values (default: null)
-	 * @return void
 	 */
-	public function __construct($values=null)      {
-
+	public function __construct($values=null) {
 		$this->init();
 		$this->setValues($values);
     }
 
 	/**
 	 * init function.
-	 * 
+	 *
 	 * @access public
 	 * @return void
 	 */
 	public function init()	{
 		//this is to be overwritten if needed
-	}  
-	
-	  
+	}
+
+
 	/**
 	 * __addList function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $name
 	 * @param mixed $list
@@ -57,24 +55,24 @@ class OneFlowBase	{
 	public function __addList($name, $list)	{
 		$this->__lists[$name] = $list;
 	}
-	
+
 	/**
 	 * __addProperty function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $name
 	 * @param string $default (default: "")
 	 * @param bool $required (default: false)
 	 * @return void
 	 */
-	public function __addProperty($name, $default="", $required=false)	{
-		$this->$name = $default;
+	public function __addProperty($name, $default = null, $required=false)	{
+		if ($default !== null) $this->$name = $default;
 		if ($required)	$this->__required[] = $name;
 	}
-	
+
 	/**
 	 * __addObject function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $collection
 	 * @param mixed $class
@@ -85,10 +83,10 @@ class OneFlowBase	{
 		$classname = "OneFlow".$class;
 		$this->$collection = new $classname();
 	}
-	
+
 	/**
 	 * __addArray function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $collection
 	 * @param mixed $class
@@ -98,32 +96,29 @@ class OneFlowBase	{
 		$this->__children[$collection] = $class;
 		$this->$collection = Array();
 	}
-	
+
 	/**
 	 * getValidationMessages function.
-	 * 
+	 *
 	 * @access public
-	 * @return void
+	 * @return array
 	 */
 	public function getValidationMessages()	{
 		return $this->__validation;
 	}
-	
+
 	/**
 	 * isValid function.
-	 * 
+	 *
 	 * @access public
-	 * @return void
+	 * @return array
 	 */
 	public function isValid()	{
-
 		global $OneFlowFilenames;
 
-		$valid = true;
 		$this->__validation = Array();
-		
-		foreach ($this->__required as $fieldName)	{
 
+		foreach ($this->__required as $fieldName)	{
 			$value = $this->$fieldName;
 
 			$set = true;
@@ -138,41 +133,33 @@ class OneFlowBase	{
 			if ($value===null)		$set = false;
 
 			if (!$set) {
-				$valid = false;
 				$this->__validation[] = get_class($this).".".$fieldName." is required";
 			}
 		}
 
 		foreach ($this->__lists as $listName=>$list)	{
-
 			$list = $this->__lists[$listName];
 			$value = $this->$listName;
 
 			if (!in_array($value, $list)) {
-				$valid = false;
 				$this->__validation[] = "'$value' is not a valid selection for ".get_class($this).".$listName";
 			}
-
 		}
 
 		$children = $this->__children;
 
 		foreach ($this as $key=>$value)	{
-
 			$type = gettype($value);
 
 			if ($type=="array")	{
-				
+
 				if (isset($children[$key]))	{
-				
 					//cycle through the array
 					foreach ($value as $arrayKey=>$arrayItem)	{
-
 						$arrayItemType = gettype($value[$arrayKey]);
 						if ($arrayItemType=="object"){
 							$this->__validation = array_merge($this->__validation, $value[$arrayKey]->isValid());
 						}
-
 					}
 				}
 
@@ -181,44 +168,40 @@ class OneFlowBase	{
 				if (isset($children[$key]))	{
 					$this->__validation = array_merge($this->__validation, $value->isValid());
 				}
-				
+
 			}	else {
 
 				if ($key=="path")	{
 
 					$uniqueCount = count(array_unique($OneFlowFilenames));
 					if ($uniqueCount!=count($OneFlowFilenames))	{
-						$this->__validation = array_merge($this->__validation, Array("Unique filenames are required"));	
+						$this->__validation = array_merge($this->__validation, Array("Unique filenames are required"));
 					}
-					
+
 				}
 			}
 		}
-		
+
 		//remove fields if empty
 		foreach ($this as $key=>$value)	{
-		
 			if (!in_array($key, $this->__required))	{
 				//not required then remove if empty
 				$this->removeIfEmpty($key);
 			}
-
 		}
 
 		return $this->__validation;
 	}
-	
+
 	/**
 	 * removeIfEmpty function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $key
 	 * @return void
 	 */
 	public function removeIfEmpty($key)	{
-	
 		if (substr($key,0,2)!="__")	{
-
 			if ($this->$key===Array()) {
 				unset($this->$key);
 			}
@@ -231,14 +214,12 @@ class OneFlowBase	{
 			if (is_object($this->$key) && (count(get_object_vars($this->$key))== 4)) {
 				unset($this->$key);
 			}
+		}
+	}
 
-		}	
-		
-	}	
-		
 	/**
 	 * setValue function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $name
 	 * @param mixed $value
@@ -246,47 +227,33 @@ class OneFlowBase	{
 	 */
 	public function setValue($name, $value)	{
 		if (property_exists($this, $name))	$this->$name = $value;
-	}	
-	
+	}
+
 	/**
 	 * setValues function.
-	 * 
+	 *
 	 * @access public
 	 * @param mixed $values
 	 * @return void
 	 */
 	public function setValues($values)	{
-
 		if ($values==null) return;
-		$intype = gettype($values);
 		//go through each of the properties of the incoming value
 		foreach ($values as $name=>$value)	{
-
 			$type = gettype($value);
-			
-			if ($type=="array")	{
-				
-				if (isset($this->__children[$name]))	{
 
+			if ($type=="array")	{
+				if (isset($this->__children[$name]))	{
 					//cycle through the array
 					foreach ($value as $element)	{
-
 						$baseClassname = $this->__children[$name];
 
 						if ($baseClassname=="String")	{
-
 							$this->{$name}[] = $element;
-							
 						}	else	{
-	
 							$classname = "OneFlow".$this->__children[$name];
-							$objectname = $name."Object";
 							$this->{$name}[] = new $classname($element);
-							
 						}
-
-
-						
 					}
 
 				}	else	{
@@ -296,50 +263,41 @@ class OneFlowBase	{
 				}
 
 			} else if ($type=="object")	{
-
 				if (isset($this->__children[$name]))	{
-					
 					$baseClassname = $this->__children[$name];
 
 					$classname = "OneFlow".$baseClassname;
-					$objectname = $name."Object";
 					$this->{$name} = new $classname($value);
-
 				}
 
-				
 			}	else	{
-
 				$this->setValue($name, $value);
 			}
 		}
-
-
 	}
-	
+
 	/**
 	 * objectToXML function.
-	 * 
+	 *
 	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function objectToXML()	{
-	
 		global $OneFlowLevel;
 
-		$OneFlowLevel++;		
+		$OneFlowLevel++;
 		$xml = "";
-		
+
 		foreach ($this as $key=>$value)	{
 			$type = gettype($this->$key);
 			$spacer = str_repeat("  ",$OneFlowLevel);
-			
+
 			if (substr($key,0,2)!="__")	{
 
 				if ($type=="array")	{
 
-					$xml .= "$spacer<$key>\n";	
-					
+					$xml .= "$spacer<$key>\n";
+
 					$array = $this->$key;
 					$OneFlowLevel++;
 					$spacer = str_repeat("  ",$OneFlowLevel);
@@ -349,44 +307,40 @@ class OneFlowBase	{
 
 						$arrayType = gettype($element);
 						if ($arrayType=="object")	{
-							$xml .= "$spacer<arrayItem index=\"$index\">\n";	
+							$xml .= "$spacer<arrayItem index=\"$index\">\n";
 							$xml .= $element->objectToXML();
-							$xml .= "$spacer</arrayItem>\n";	
+							$xml .= "$spacer</arrayItem>\n";
 						}	else	{
 							$xml .= "$spacer<arrayItem index=\"$index\">$element</arrayItem>\n";
-						}						
+						}
 					}
 
 					$OneFlowLevel--;
 					$spacer = str_repeat("  ",$OneFlowLevel);
-					
-					$xml .= "$spacer</$key>\n";
 
-				
+					$xml .= "$spacer</$key>\n";
 				}	else if ($type=="object")	{
-	
-					$xml .= "$spacer<$key>\n";	
+
+					$xml .= "$spacer<$key>\n";
 					$xml .= $this->$key->objectToXML();
 					$xml .= "$spacer</$key>\n";
-					
+
 				} 	else	{
-				
 					$xml .= "$spacer<$key>$value</$key>\n";
 				}
 			}
-			
-		}		
-		
+		}
+
 		$OneFlowLevel--;
-		
+
 		return $xml;
 	}
 
 	/**
 	 * toJSON function.
-	 * 
+	 *
 	 * @access public
-	 * @return void
+	 * @return mixed
 	 */
 	public function toJSON()	{
 		return json_encode($this);
@@ -394,30 +348,29 @@ class OneFlowBase	{
 
 	/**
 	 * toPrettyJSON function.
-	 * 
+	 *
 	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function toPrettyJSON()	{
 		return $this->prettyPrint(json_encode($this))."\n";
 	}
-	
+
 	/**
 	 * prettyPrint function.
-	 * 
+	 *
 	 * @access private
 	 * @param mixed $json
-	 * @return void
+	 * @return string
 	 */
 	private function prettyPrint($json)	{
-
 	    $result = '';
 	    $level = 0;
 	    $prev_char = '';
 	    $in_quotes = false;
 	    $ends_line_level = NULL;
 	    $json_length = strlen( $json );
-	
+
 	    for( $i = 0; $i < $json_length; $i++ ) {
 	        $char = $json[$i];
 	        $new_line_level = NULL;
@@ -435,17 +388,17 @@ class OneFlowBase	{
 	                    $ends_line_level = NULL;
 	                    $new_line_level = $level;
 	                    break;
-	
+
 	                case '{': case '[':
 	                    $level++;
 	                case ',':
 	                    $ends_line_level = $level;
 	                    break;
-	
+
 	                case ':':
 	                    $post = " ";
 	                    break;
-	
+
 	                case " ": case "\t": case "\n": case "\r":
 	                    $char = "";
 	                    $ends_line_level = $new_line_level;
@@ -459,9 +412,9 @@ class OneFlowBase	{
 	        $result .= $char.$post;
 	        $prev_char = $char;
 	    }
-	
+
 	    return $result;
-	}	
+	}
 }
 
 ?>

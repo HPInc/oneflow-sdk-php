@@ -14,7 +14,6 @@ class OneFlowAttachment extends OneFlowBase {
 	 * @return void
 	 */
 	public function init()      {
-
 		$this->__addProperty("path", "", true);
 	}
 
@@ -22,10 +21,10 @@ class OneFlowAttachment extends OneFlowBase {
 	 * setPath function.
 	 *
 	 * @access public
+	 * @param string $path
 	 * @return void
 	 */
 	public function setPath($path)      {
-
 		$this->path = $path;
 	}
 }

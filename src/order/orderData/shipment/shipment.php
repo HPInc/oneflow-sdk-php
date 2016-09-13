@@ -35,7 +35,8 @@ class OneFlowShipment extends OneFlowBase {
 	 * newAttachment function.
 	 *
 	 * @access public
-	 * @return void
+     * @param string $path
+	 * @return OneFlowAttachment
 	 */
 	public function newAttachment($path)	{
 		$attachment = new OneFlowAttachment();
@@ -145,8 +146,7 @@ class OneFlowShipment extends OneFlowBase {
 	 * setCarrierByAlias function.
 	 *
 	 * @access public
-	 * @param mixed $code
-	 * @param mixed $service
+	 * @param mixed $alias
 	 * @return void
 	 */
 	public function setCarrierByAlias($alias)      {
@@ -163,7 +163,6 @@ class OneFlowShipment extends OneFlowBase {
 	public function setLabelName($labelName)      {
 		$this->labelName = $labelName;
 	}
-
 }
 
 ?>
