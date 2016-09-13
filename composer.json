@@ -1,6 +1,6 @@
 {
   "name": "oneflow/php-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "PHP SDK for OneFlow",
   "minimum-stability": "stable",
   "license": "OneFlow Master",

@@ -65,7 +65,7 @@ class OneflowSDK {
 	 * accountsGetMy function.
 	 *
 	 * @access public
-	 * @return void
+	 * @return mixed
 	 */
 	public function accountsGetMy(){
 		return json_decode($this->get('/account'));
@@ -75,7 +75,7 @@ class OneflowSDK {
 	 * accountsGetAll function.
 	 *
 	 * @access public
-	 * @return void
+	 * @return mixed
 	 */
 	public function accountsGetAll(){
 		return json_decode($this->get('/account/all'));
@@ -86,7 +86,7 @@ class OneflowSDK {
 	 *
 	 * @access public
 	 * @param mixed $id
-	 * @return void
+	 * @return mixed
 	 */
 	public function accountsGetById($id){
 		return json_decode($this->get('/account/' . $id));
@@ -96,9 +96,9 @@ class OneflowSDK {
 	 * accountsCreate function.
 	 *
 	 * @access public
-	 * @return void
+	 * @return mixed
 	 */
-	public function accountsCreate(){
+	public function accountsCreate($data){
 		return json_decode($this->post('/account', $data));
 	}
 
@@ -109,7 +109,7 @@ class OneflowSDK {
 	 *
 	 * @access private
 	 * @param mixed $orderResponse
-	 * @return void
+	 * @return mixed
 	 */
 	private function processOrderArray($orderResponse){
 		$orders = Array();
@@ -131,7 +131,7 @@ class OneflowSDK {
 	 *
 	 * @access public
 	 * @param mixed $id
-	 * @return void
+	 * @return OneFlowOrder
 	 */
 	public function ordersGetById($id){
 		$order = json_decode($this->get('/order/' . $id));
@@ -143,13 +143,11 @@ class OneflowSDK {
 	 *
 	 * @access public
 	 * @param mixed $order
-	 * @return void
+	 * @return mixed
 	 */
 	public function orderValidate($order)	{
-
 		echo "Validation     : Passed\n";
 		return $this->post('/order/validate', $order->toJSON());
-
 	}
 
 	/**
@@ -157,23 +155,17 @@ class OneflowSDK {
 	 *
 	 * @access public
 	 * @param mixed $order
-	 * @return void
+	 * @return mixed
 	 */
 	public function ordersCreate($order)	{
-
 		//check that order is valid before submission
-
 		if (count($order->isValid())>0)	{
-
 			echo "Validation     : Failed\n";
 			return $order->validateOrder();
-
 		}	else	{
-
 			echo "Validation     : Passed\n";
 			return $this->post('/order', $order->toJSON());
 		}
-
 	}
 
 	/**
@@ -182,7 +174,7 @@ class OneflowSDK {
 	 * @access public
 	 * @param mixed $uploadUrl
 	 * @param mixed $localPath
-	 * @return void
+	 * @return mixed
 	 */
 	public function postFile($uploadUrl, $localPath){
 		if (file_exists($localPath))	{
@@ -197,7 +189,7 @@ class OneflowSDK {
 	 *
 	 * @access public
 	 * @param mixed $id
-	 * @return void
+	 * @return mixed
 	 */
 	public function orderCancel($id){
 		if (strlen($id)>0)		return $this->put("/order/$id/cancel");
@@ -210,7 +202,7 @@ class OneflowSDK {
 	 * @access public
 	 * @param mixed $id
 	 * @param mixed $orderData
-	 * @return void
+	 * @return mixed
 	 */
 	public function ordersUpdateById($id, $orderData){
 		if (strlen($id)>0)	return $this->put("/order/$id", json_encode($orderData));
@@ -227,10 +219,10 @@ class OneflowSDK {
 	 * @param mixed $path
 	 * @param mixed $jsonData (default: null)
 	 * @param mixed $optional_headers (default: null)
-	 * @return void
+     * @throws Exception
+	 * @return mixed
 	 */
-	protected function request($method, $path, $jsonData=null, $optional_headers = null)	{
-
+	protected function request($method, $path, $jsonData=null, $optional_headers = null) {
 		ini_set("track_errors","on");
 
 		$timestamp = time();
@@ -255,18 +247,15 @@ class OneflowSDK {
 		}
 
 		$params['http']['header'][] = "x-oneflow-date: $timestamp";
-		$params['http']['header'][] = $this->authHeader.": ".$this->token($method, $fullPath, $timestamp, $jsonData);
+		$params['http']['header'][] = $this->authHeader.": ".$this->token($method, $fullPath, $timestamp);
 
 		foreach ($optional_headers as $name => $value)	{
 			$params['http']['header'][] = "$name: $value";
 		}
 
-//		echo "Connecting To  : $url\n";
-
 		$context = stream_context_create($params);
 		$fp = fopen($url, 'rb', false, $context);
 		if (!$fp)	{
-//			print_r($http_response_header);
 			throw new Exception("Problem creating stream from $url, \n\t".implode("\n\t", error_get_last()));
 		}
 
@@ -282,17 +271,15 @@ class OneflowSDK {
 	 * @access private
 	 * @param mixed $path
 	 * @param string $format (default: 'application/json')
-	 * @return void
+	 * @return mixed
 	 */
 	protected function get($path, $format = 'application/json'){
-
 		try {
-
 			$response = $this->request("GET", $path, "", array(
 	    		'Accept' => $format,
 			));
-
 		} catch (Exception $e) {
+		    $response = null;
 			echo "get exception\n";
 			echo $e->getMessage()."\n";
 		}
@@ -307,19 +294,17 @@ class OneflowSDK {
 	 * @param mixed $path
 	 * @param mixed $jsonData
 	 * @param string $format (default: 'application/json')
-	 * @return void
+	 * @return mixed
 	 */
 	protected function post($path, $jsonData, $format = 'application/json')	{
-
 		try {
-
 			$response = $this->request("POST", $path, $jsonData, array(
 	    		'Content-Type' => $format,
 	    		'Accept' => $format,
 			));
-
 		} catch (Exception $e) {
-			echo $e->getMessage()."\n";
+            $response = null;
+            echo $e->getMessage()."\n";
 		}
 
 		return $response;
@@ -332,19 +317,17 @@ class OneflowSDK {
 	 * @param mixed $path
 	 * @param mixed $jsonData
 	 * @param string $format (default: 'application/json')
-	 * @return void
+	 * @return mixed
 	 */
 	protected function put($path, $jsonData, $format = 'application/json'){
-
 		try {
-
 			$response = $this->request("PUT", $path, $jsonData, array(
 	    		'Content-Type' => $format,
 	    		'Accept' => $format,
 			));
-
 		} catch (Exception $e) {
-			echo $e->getMessage()."\n";
+            $response = null;
+            echo $e->getMessage()."\n";
 		}
 
 		return $response;
@@ -356,17 +339,16 @@ class OneflowSDK {
 	 * @access private
 	 * @param mixed $path
 	 * @param string $format (default: 'application/json')
-	 * @return void
+	 * @return mixed
 	 */
 	protected function del($path, $format = 'application/json'){
-
 		try {
 			$response = $this->request("DELETE", $path, "", array(
 	    		'Accept' => $format,
 			));
-
 		} catch (Exception $e) {
-			echo $e->getMessage()."\n";
+            $response = null;
+            echo $e->getMessage()."\n";
 		}
 
 		return $response;
@@ -378,7 +360,8 @@ class OneflowSDK {
 	 * @access public
 	 * @param mixed $uploadUrl
 	 * @param mixed $localPath
-	 * @return void
+     * @throws Exception when a problem occurs
+	 * @return mixed
 	 */
 	protected function post_file_s3($uploadUrl, $localPath)	{
 
@@ -409,7 +392,7 @@ class OneflowSDK {
 		if (!$fp)					throw new Exception("PROBLEM:\n".implode("\n\t", error_get_last())."\n\n\n\n");
 
 		$response = stream_get_contents($fp);
-		if ($response === false) 	throw new Exception("Problem reading data from $url, $php_errormsg");
+		if ($response === false) 	throw new Exception("Problem reading data from $uploadUrl, $php_errormsg");
 
 		return $response;
 	}
@@ -421,7 +404,7 @@ class OneflowSDK {
 	 * @param mixed $method
 	 * @param mixed $path
 	 * @param mixed $timestamp
-	 * @return void
+	 * @return string
 	 */
 	private function token($method, $path, $timestamp){
 		$stringToSign = strtoupper($method) . ' ' . $path . ' ' . $timestamp;

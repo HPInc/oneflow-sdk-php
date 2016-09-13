@@ -16,7 +16,6 @@ class OneFlowItem extends OneFlowBase {
 	 * @return void
 	 */
 	public function init()      {
-
 		$this->__addArray("components","Component");
 
 		$this->__addProperty("description");
@@ -35,11 +34,10 @@ class OneFlowItem extends OneFlowBase {
      * newComponent function.
      *
      * @access public
-     * @param string $type
-     * @return void
+     * @param string $code
+     * @return OneFlowComponent
      */
     public function newComponent($code){
-
     	$count = count($this->components);
     	$component = new OneFlowComponent();
         $component->setCode($code);
@@ -52,10 +50,9 @@ class OneFlowItem extends OneFlowBase {
      * addTextComponent function.
      *
      * @access public
-     * @return void
+     * @return OneFlowComponent
      */
     public function addTextComponent()	{
-
 	    return $this->newComponent('text');
     }
 
@@ -63,10 +60,10 @@ class OneFlowItem extends OneFlowBase {
      * addTextComponent function.
      *
      * @access public
-     * @return void
+     * @param string $barcode
+     * @return string
      */
     public function setBarcode($barcode)	{
-
 	    return $this->barcode = $barcode;
     }
 
@@ -74,10 +71,9 @@ class OneFlowItem extends OneFlowBase {
      * addCoverComponent function.
      *
      * @access public
-     * @return void
+     * @return OneFlowComponent
      */
     public function addCoverComponent()	{
-
 	    return $this->newComponent('cover');
     }
 
@@ -100,7 +96,6 @@ class OneFlowItem extends OneFlowBase {
      * @return void
      */
     public function setShipment($shipment)	{
-
 	    $this->shipmentIndex = $shipment->shipmentIndex;
     }
 
@@ -109,10 +104,9 @@ class OneFlowItem extends OneFlowBase {
      *
      * @access public
      * @param mixed $binding
-     * @return void
+     * @return boolean
      */
     public function setBinding($binding)	{
-
 		$this->__addList("binding", Array("perfect", "saddle", "wiro", "pur", "threadSawn"));
 		$this->binding = $binding;
 		return true;
@@ -123,10 +117,9 @@ class OneFlowItem extends OneFlowBase {
      *
      * @access public
      * @param mixed $folding
-     * @return void
+     * @return boolean
      */
     public function setFolding($folding)	{
-
 		$this->__addList("folding", Array("half", "gate", "cross", "concertina", "z", "2", "3"));
 		$this->folding = $folding;
 		return true;
@@ -140,7 +133,6 @@ class OneFlowItem extends OneFlowBase {
      * @return void
      */
     public function setQuantity($quantity)	{
-
 	    $this->quantity = $quantity;
     }
 
@@ -152,7 +144,6 @@ class OneFlowItem extends OneFlowBase {
      * @return void
      */
     public function setSourceItemId($sourceItemId)	{
-
 	    $this->sourceItemId = $sourceItemId;
     }
 
@@ -164,10 +155,8 @@ class OneFlowItem extends OneFlowBase {
      * @return void
      */
     public function setSKU($skuCode)	{
-
 	    $this->sku = $skuCode;
     }
-
 }
 
 ?>

@@ -20,13 +20,13 @@ class OneFlowStockItem extends OneFlowBase {
     }
 
     /**
-     * addTextComponent function.
+     * setCode function.
      *
      * @access public
-     * @return void
+     * @param mixed $code
+     * @return mixed
      */
     public function setCode($code)    {
-
         return $this->code = $code;
     }
 
@@ -38,7 +38,6 @@ class OneFlowStockItem extends OneFlowBase {
      * @return void
      */
     public function setQuantity($quantity)  {
-
         $this->quantity = $quantity;
     }
 
@@ -51,23 +50,19 @@ class OneFlowStockItem extends OneFlowBase {
      * @return void
      */
     public function setShipment($shipment)  {
-
         $this->shipmentIndex = $shipment->shipmentIndex;
     }
 
     /**
-     * setQuantity function.
+     * setShipmentIndex function.
      *
      * @access public
-     * @param mixed $quantity
+     * @param mixed $shipmentIndex
      * @return void
      */
     public function setShipmentIndex($shipmentIndex)  {
-
         $this->shipmentIndex = $shipmentIndex;
     }
-
-
 }
 
 ?>
