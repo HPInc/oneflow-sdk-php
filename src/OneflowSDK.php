@@ -136,7 +136,7 @@ class OneflowSDK {
 	 *
 	 * @return \OneFlowOrder
 	 */
-	public function ordersList($page = 1, $pagesize = null){
+	public function ordersList($page = 1, $pagesize = 10){
 		$path = '/order?page=' . $page . ($pagesize ? "&pagesize=" .  $pagesize : "");
 		$list = json_decode($this->get($path));
 
