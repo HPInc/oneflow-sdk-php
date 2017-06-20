@@ -319,7 +319,7 @@ class OneflowSDK {
 	 * @param string $format (default: 'application/json')
 	 * @return mixed
 	 */
-	protected function put($path, $jsonData, $format = 'application/json'){
+	protected function put($path, $jsonData = null, $format = 'application/json'){
 		try {
 			$response = $this->request("PUT", $path, $jsonData, array(
 	    		'Content-Type' => $format,
