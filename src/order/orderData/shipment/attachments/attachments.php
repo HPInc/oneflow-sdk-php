@@ -15,6 +15,7 @@ class OneFlowAttachment extends OneFlowBase {
 	 */
 	public function init()      {
 		$this->__addProperty("path", "", true);
+		$this->__addProperty("type", "", false);
 	}
 
 	/**
