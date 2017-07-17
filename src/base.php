@@ -248,6 +248,7 @@ class OneFlowBase	{
 						if ($baseClassname=="String")	{
 							$this->{$name}[] = $element;
 						}	else	{
+							@class_alias("OneFlowAttachment", "OneFlowAttachments", true);
 							$classname = "OneFlow".$this->__children[$name];
 							$this->{$name}[] = new $classname($element);
 						}
