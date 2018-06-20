@@ -146,7 +146,6 @@ class OneflowSDK {
 	 * @return mixed
 	 */
 	public function orderValidate($order)	{
-		echo "Validation     : Passed\n";
 		return $this->post('/order/validate', $order->toJSON());
 	}
 
@@ -160,10 +159,8 @@ class OneflowSDK {
 	public function ordersCreate($order)	{
 		//check that order is valid before submission
 		if (count($order->isValid())>0)	{
-			echo "Validation     : Failed\n";
 			return $order->validateOrder();
 		}	else	{
-			echo "Validation     : Passed\n";
 			return $this->post('/order', $order->toJSON());
 		}
 	}
