@@ -33,6 +33,7 @@ class OneFlowComponent extends OneFlowBase	{
 		$this->__addProperty("width", "", false);
 		$this->__addProperty("height", "", false);
 		$this->__addArray("attributes", null);
+		$this->__addArray("extraData", null);
     }
 
 	/**
@@ -278,6 +279,17 @@ class OneFlowComponent extends OneFlowBase	{
     public function addAttribute($name, $value = null)	{
 	    $this->attributes[$name] = $value;
     }
+
+	/**
+	 * setExtraData function.
+	 *
+	 * @access public
+	 * @param mixed $extraData
+	 * @return void
+	 */
+	public function setExtraData($extraData)	{
+		$this->extraData = $extraData;
+	}
 }
 
 ?>
