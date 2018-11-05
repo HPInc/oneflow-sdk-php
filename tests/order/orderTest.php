@@ -13,10 +13,18 @@ final class OneflowOrderTest extends TestCase
 		$orderData->setSourceOrderId('uniqueSourceOrderId');
 		$orderData->setCustomerName('customerName');
 		$orderData->setEmail('customerEmail');
+		$orderData->setExtraData([
+			'param1' => 'value1',
+			'param2' => 'value2'
+		]);
 
 		$item = $orderData->newSKUItem('skuCode', 'itemId', 5);
 		$item->setBarcode('customItemBarcode');
 		$item->setDispatchAlert('my item dispatch alert');
+		$item->setExtraData([
+			'param3' => 'value3',
+			'param4' => 'value4'
+		]);
 
 		$component = $item->newComponent('componentCode');
 		$component->setFetchUrl('http://site.com/file.pdf');
@@ -27,6 +35,10 @@ final class OneflowOrderTest extends TestCase
 		$component->setBarcode('customComponentBarcode');
 		$component->addAttribute('fooString', 'bar');
 		$component->addAttribute('fooNumber', 123);
+		$component->setExtraData([
+			'param5' => 'value5',
+			'param6' => 'value6'
+		]);
 
 		$stockItem = $orderData->newStockItem('stockCode', 100);
 
@@ -78,10 +90,13 @@ final class OneflowOrderTest extends TestCase
 		// Order
 		$this->assertObjectHasAttribute('orderData', $result);
 		$this->assertObjectHasAttribute('destination', $result);
+		$this->assertObjectHasAttribute('extraData', $result->orderData);
 		$this->assertEquals('destinationName', $result->destination->name);
 		$this->assertEquals('uniqueSourceOrderId', $result->orderData->sourceOrderId);
 		$this->assertEquals('customerName', $result->orderData->customerName);
 		$this->assertEquals('customerEmail', $result->orderData->email);
+		$this->assertEquals('value1', $result->orderData->extraData->param1);
+		$this->assertEquals('value2', $result->orderData->extraData->param2);
 
 		// Items
 		$this->assertEquals(1, count($result->orderData->items));
@@ -92,6 +107,9 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals(5, $outputItem->quantity);
 		$this->assertEquals(0, $outputItem->shipmentIndex);
 		$this->assertEquals('my item dispatch alert', $outputItem->dispatchAlert);
+		$this->assertObjectHasAttribute('extraData', $outputItem);
+		$this->assertEquals('value3', $outputItem->extraData->param3);
+		$this->assertEquals('value4', $outputItem->extraData->param4);
 
 		$this->assertEquals(1, count($outputItem->components));
 		$outputComponent = $outputItem->components[0];
@@ -106,6 +124,9 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals(true, $outputComponent->preflight);
 		$this->assertEquals('custom', $outputComponent->preflightProfile);
 		$this->assertEquals('preflightProfileId', $outputComponent->preflightProfileId);
+		$this->assertObjectHasAttribute('extraData', $outputComponent);
+		$this->assertEquals('value5', $outputComponent->extraData->param5);
+		$this->assertEquals('value6', $outputComponent->extraData->param6);
 
 		// Stock items
 		$this->assertEquals(1, count($result->orderData->stockItems));
