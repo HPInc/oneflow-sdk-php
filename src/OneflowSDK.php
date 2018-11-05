@@ -127,6 +127,23 @@ class OneflowSDK {
 	}
 
 	/**
+	 * Get all orders
+	 *
+	 * @access public
+	 *
+	 * @param int $page
+	 * @param int|null $pagesize
+	 *
+	 * @return \OneFlowOrder
+	 */
+	public function ordersList($page = 1, $pagesize = 10){
+		$path = '/order?page=' . $page . ($pagesize ? "&pagesize=" .  $pagesize : "");
+		$list = json_decode($this->get($path));
+
+		return $list;
+	}
+
+	/**
 	 * ordersGetById function.
 	 *
 	 * @access public
@@ -319,7 +336,7 @@ class OneflowSDK {
 	 * @param string $format (default: 'application/json')
 	 * @return mixed
 	 */
-	protected function put($path, $jsonData, $format = 'application/json'){
+	protected function put($path, $jsonData = null, $format = 'application/json'){
 		try {
 			$response = $this->request("PUT", $path, $jsonData, array(
 	    		'Content-Type' => $format,

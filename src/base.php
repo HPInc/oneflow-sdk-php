@@ -205,13 +205,10 @@ class OneFlowBase	{
 			if ($this->$key===Array()) {
 				unset($this->$key);
 			}
-
-			if ($this->$key==="") {
-//				echo "removing $key\n";
+			elseif ($this->$key==="") {
 				unset($this->$key);
 			}
-
-			if (is_object($this->$key) && (count(get_object_vars($this->$key))== 4)) {
+			elseif (is_object($this->$key) && (count(get_object_vars($this->$key))== 4)) {
 				unset($this->$key);
 			}
 		}
@@ -251,6 +248,7 @@ class OneFlowBase	{
 						if ($baseClassname=="String")	{
 							$this->{$name}[] = $element;
 						}	else	{
+							@class_alias("OneFlowAttachment", "OneFlowAttachments", true);
 							$classname = "OneFlow".$this->__children[$name];
 							$this->{$name}[] = new $classname($element);
 						}

@@ -35,12 +35,16 @@ class OneFlowShipment extends OneFlowBase {
 	 * newAttachment function.
 	 *
 	 * @access public
-     * @param string $path
-	 * @return OneFlowAttachment
+	 *
+	 * @param string        $path
+	 * @param null|string   $type
+	 *
+	 * @return \OneFlowAttachment
 	 */
-	public function newAttachment($path)	{
+	public function newAttachment($path, $type = null)	{
 		$attachment = new OneFlowAttachment();
 		$attachment->setPath($path);
+		if($type) $attachment->setValue("type", $type);
 		$this->attachments[] = $attachment;
 		return end($this->attachments);
 	}
