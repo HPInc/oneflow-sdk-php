@@ -12,5 +12,11 @@
   ],
   "autoload": {
     "files": ["src/OneflowSDK.php", "src/ProductionSDK.php"]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
+  },
+  "scripts": {
+    "test": "phpunit --bootstrap vendor/autoload.php --testdox --coverage-clover=coverage.xml --coverage-html coverage --whitelist src tests"
   }
 }

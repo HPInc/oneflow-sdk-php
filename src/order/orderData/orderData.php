@@ -26,6 +26,7 @@ class OneFlowOrderData extends OneFlowBase	{
 		$this->__addArray("items","Item");
 		$this->__addArray("stockItems","stockItems");
 		$this->__addArray("error","Error");
+		$this->__addArray("extraData",null);
 
 		$this->__addProperty("printType", "digital", true);
 		$this->__addProperty("sourceOrderId", "", true);
@@ -184,6 +185,17 @@ class OneFlowOrderData extends OneFlowBase	{
 	 */
 	public function setEmail($email)	{
 		$this->email = $email;
+	}
+
+	/**
+	 * setExtraData function.
+	 *
+	 * @access public
+	 * @param mixed $extraData
+	 * @return void
+	 */
+	public function setExtraData($extraData)	{
+		$this->extraData = $extraData;
 	}
 }
 

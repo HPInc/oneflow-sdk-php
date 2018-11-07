@@ -26,6 +26,7 @@ class OneFlowItem extends OneFlowBase {
 		$this->__addProperty("shrinkWrap", false);
 		$this->__addProperty("barcode", "", false);
 		$this->__addProperty("dispatchAlert");
+		$this->__addArray("extraData",null);
 
 		$this->__addProperty("colour");
     }
@@ -157,6 +158,17 @@ class OneFlowItem extends OneFlowBase {
     public function setSKU($skuCode)	{
 	    $this->sku = $skuCode;
     }
+
+	/**
+	 * setExtraData function.
+	 *
+	 * @access public
+	 * @param mixed $extraData
+	 * @return void
+	 */
+	public function setExtraData($extraData)	{
+		$this->extraData = $extraData;
+	}
 }
 
 ?>
