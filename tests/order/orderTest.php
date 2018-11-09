@@ -19,6 +19,7 @@ final class OneflowOrderTest extends TestCase
 		]);
 
 		$item = $orderData->newSKUItem('skuCode', 'itemId', 5);
+		$item->setPrintQuantity(1);
 		$item->setBarcode('customItemBarcode');
 		$item->setDispatchAlert('my item dispatch alert');
 		$item->setExtraData([
@@ -75,6 +76,7 @@ final class OneflowOrderTest extends TestCase
 		$shipment->newAttachment('http://site.com/attachment.pdf', 'insert');
 		$shipment->setDispatchAlert('my shipment dispatch alert');
 		$shipment->setLabelName('labelName');
+		$shipment->setSlaDays(5);
 
 		$item->setShipment($shipment);
 		$stockItem->setShipment($shipment);
@@ -107,6 +109,7 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals('itemId', $outputItem->sourceItemId);
 		$this->assertEquals('customItemBarcode', $outputItem->barcode);
 		$this->assertEquals(5, $outputItem->quantity);
+		$this->assertEquals(1, $outputItem->printQuantity);
 		$this->assertEquals(0, $outputItem->shipmentIndex);
 		$this->assertEquals('my item dispatch alert', $outputItem->dispatchAlert);
 		$this->assertObjectHasAttribute('extraData', $outputItem);
@@ -176,6 +179,7 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals('carrierCode', $outputShipment->carrier->code);
 		$this->assertEquals('carrierService', $outputShipment->carrier->service);
 		$this->assertEquals('carrierAlias', $outputShipment->carrier->alias);
+		$this->assertEquals(5, $outputShipment->slaDays);
 
 		$this->assertEquals(1, count($outputShipment->attachments));
 		$outputAttachment = $outputShipment->attachments[0];

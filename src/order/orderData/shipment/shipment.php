@@ -28,6 +28,7 @@ class OneFlowShipment extends OneFlowBase {
 		$this->__addProperty("pspBranding", true);
 		$this->__addProperty("labelName");
 		$this->__addProperty("cost");
+		$this->__addProperty("slaDays");
 		$this->__addProperty("dispatchAlert");
 	}
 
@@ -170,6 +171,17 @@ class OneFlowShipment extends OneFlowBase {
 	 */
 	public function setLabelName($labelName)      {
 		$this->labelName = $labelName;
+	}
+
+	/**
+	 * setSlaDays function.
+	 *
+	 * @access public
+	 * @param integer $slaDays
+	 * @return void
+	 */
+	public function setSlaDays($slaDays)      {
+		$this->slaDays = $slaDays;
 	}
 }
 
