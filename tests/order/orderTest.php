@@ -66,7 +66,9 @@ final class OneflowOrderTest extends TestCase
 			'town',
 			'state',
 			'postcode',
-			'isoCountryCode'
+			'isoCountryCode',
+			'country',
+			'phone'
 		);
 		$shipment->setCarrier('carrierCode', 'carrierService');
 		$shipment->setCarrierByAlias('carrierAlias');
@@ -167,6 +169,8 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals('state', $outputShipment->returnAddress->state);
 		$this->assertEquals('postcode', $outputShipment->returnAddress->postcode);
 		$this->assertEquals('isoCountryCode', $outputShipment->returnAddress->isoCountry);
+		$this->assertEquals('country', $outputShipment->returnAddress->country);
+		$this->assertEquals('phone', $outputShipment->returnAddress->phone);
 
 		$this->assertObjectHasAttribute('carrier', $outputShipment);
 		$this->assertEquals('carrierCode', $outputShipment->carrier->code);
