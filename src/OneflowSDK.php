@@ -226,12 +226,9 @@ class OneflowSDK {
 		else				return false;
 	}
 
-/////////////////////////////////////////////////////////////////
-
 	/**
-	 * request function.
+	 * Performs an HTTP request to the OneFlow API
 	 *
-	 * @access private
 	 * @param mixed $method
 	 * @param mixed $path
 	 * @param mixed $jsonData (default: null)
@@ -239,7 +236,7 @@ class OneflowSDK {
      * @throws Exception
 	 * @return mixed
 	 */
-	protected function request($method, $path, $jsonData=null, $optional_headers = null) {
+	public function request($method, $path, $jsonData=null, $optional_headers = null) {
 		ini_set("track_errors","on");
 
 		$timestamp = time();
@@ -283,14 +280,13 @@ class OneflowSDK {
 	}
 
 	/**
-	 * get function.
+	 * Performs a GET HTTP request
 	 *
-	 * @access private
 	 * @param mixed $path
 	 * @param string $format (default: 'application/json')
 	 * @return mixed
 	 */
-	protected function get($path, $format = 'application/json'){
+	public function get($path, $format = 'application/json'){
 		try {
 			$response = $this->request("GET", $path, "", array(
 	    		'Accept' => $format,
@@ -305,15 +301,14 @@ class OneflowSDK {
 	}
 
 	/**
-	 * post function.
+	 * Performs a POST HTTP request
 	 *
-	 * @access private
 	 * @param mixed $path
 	 * @param mixed $jsonData
 	 * @param string $format (default: 'application/json')
 	 * @return mixed
 	 */
-	protected function post($path, $jsonData, $format = 'application/json')	{
+	public function post($path, $jsonData, $format = 'application/json')	{
 		try {
 			$response = $this->request("POST", $path, $jsonData, array(
 	    		'Content-Type' => $format,
@@ -328,15 +323,14 @@ class OneflowSDK {
 	}
 
 	/**
-	 * put function.
+	 * Performs a PUT HTTP request
 	 *
-	 * @access private
 	 * @param mixed $path
 	 * @param mixed $jsonData
 	 * @param string $format (default: 'application/json')
 	 * @return mixed
 	 */
-	protected function put($path, $jsonData = null, $format = 'application/json'){
+	public function put($path, $jsonData = null, $format = 'application/json'){
 		try {
 			$response = $this->request("PUT", $path, $jsonData, array(
 	    		'Content-Type' => $format,
@@ -351,14 +345,13 @@ class OneflowSDK {
 	}
 
 	/**
-	 * del function.
+	 * Performs a DELETE HTTP request
 	 *
-	 * @access private
 	 * @param mixed $path
 	 * @param string $format (default: 'application/json')
 	 * @return mixed
 	 */
-	protected function del($path, $format = 'application/json'){
+	public function del($path, $format = 'application/json'){
 		try {
 			$response = $this->request("DELETE", $path, "", array(
 	    		'Accept' => $format,
