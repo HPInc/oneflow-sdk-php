@@ -70,7 +70,7 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * @param mixed $quantity
 	 * @return OneFlowItem
 	 */
-	public function newSKUItem($skuCode, $sourceItemId, $quantity)	{
+	public function newSKUItem($skuCode, $sourceItemId, $quantity = 1)	{
 		$item = new OneFlowItem();
 		$item->setSourceItemId($sourceItemId);
 		$item->setQuantity($quantity);
@@ -89,7 +89,7 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * @param mixed $shipmentIndex
 	 * @return OneFlowStockItem
 	 */
-	public function newStockItem($stockCode, $quantity)	{
+	public function newStockItem($stockCode, $quantity = 1)	{
 		$stockItem = new OneFlowStockItem();
 		$stockItem->setCode($stockCode);
 		$stockItem->setQuantity($quantity);
