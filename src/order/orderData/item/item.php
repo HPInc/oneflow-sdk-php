@@ -22,11 +22,14 @@ class OneFlowItem extends OneFlowBase {
 		$this->__addProperty("shipmentIndex", 0, true);
 		$this->__addProperty("sourceItemId", "", true);
 		$this->__addProperty("sku");
+		$this->__addProperty("sourceProductId");
 		$this->__addProperty("quantity", 1, true);
 		$this->__addProperty("printQuantity");
-		$this->__addProperty("shrinkWrap", false);
-		$this->__addProperty("barcode", "", false);
+		$this->__addProperty("barcode");
 		$this->__addProperty("dispatchAlert");
+		$this->__addProperty("unitWeight");
+		$this->__addProperty("unitCost");
+		$this->__addProperty("unitPrice");
 		$this->__addArray("extraData",null);
 
 		$this->__addProperty("colour");
@@ -169,6 +172,50 @@ class OneFlowItem extends OneFlowBase {
 	 */
 	public function setSKU($skuCode)	{
 		$this->sku = $skuCode;
+	}
+
+	/**
+	 * setSourceProductId function.
+	 *
+	 * @access public
+	 * @param string $sourceProductId
+	 * @return void
+	 */
+	public function setSourceProductId($sourceProductId)	{
+		$this->sourceProductId = $sourceProductId;
+	}
+
+	/**
+	 * setUnitWeight function.
+	 *
+	 * @access public
+	 * @param float $unitWeight
+	 * @return void
+	 */
+	public function setUnitWeight($unitWeight)	{
+		$this->unitWeight = $unitWeight;
+	}
+
+	/**
+	 * setUnitPrice function.
+	 *
+	 * @access public
+	 * @param float $unitPrice
+	 * @return void
+	 */
+	public function setUnitPrice($unitPrice)	{
+		$this->unitPrice = $unitPrice;
+	}
+
+	/**
+	 * setUnitCost function.
+	 *
+	 * @access public
+	 * @param float $unitCost
+	 * @return void
+	 */
+	public function setUnitCost($unitCost)	{
+		$this->unitCost = $unitCost;
 	}
 
 	/**

@@ -22,7 +22,7 @@ class OneFlowAddress extends OneFlowBase {
 		$this->__addProperty("address3", "");
 		$this->__addProperty("town", "", true);
 		$this->__addProperty("state", "");
-		$this->__addProperty("postcode", "", true);
+		$this->__addProperty("postcode", "");
 		$this->__addProperty("isoCountry", "", true);
 		$this->__addProperty("country", "");
 		$this->__addProperty("phone");

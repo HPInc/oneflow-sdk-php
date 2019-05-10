@@ -16,6 +16,8 @@ class OneFlowAttachment extends OneFlowBase {
 	public function init()      {
 		$this->__addProperty("path", "", true);
 		$this->__addProperty("type", "", false);
+		$this->__addProperty("contentType");
+		$this->__addProperty("fetch");
 	}
 
 	/**
@@ -27,6 +29,39 @@ class OneFlowAttachment extends OneFlowBase {
 	 */
 	public function setPath($path)      {
 		$this->path = $path;
+	}
+
+	/**
+	 * setType function.
+	 *
+	 * @access public
+	 * @param string $type
+	 * @return void
+	 */
+	public function setType($type)      {
+		$this->type = $type;
+	}
+
+	/**
+	 * setContentType function.
+	 *
+	 * @access public
+	 * @param string $contentType
+	 * @return void
+	 */
+	public function setContentType($contentType)      {
+		$this->contentType = $contentType;
+	}
+
+	/**
+	 * setFetch function.
+	 *
+	 * @access public
+	 * @param boolean $fetch
+	 * @return void
+	 */
+	public function setFetch($fetch)      {
+		$this->fetch = $fetch;
 	}
 }
 

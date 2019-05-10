@@ -40,13 +40,14 @@ class OneFlowOrderData extends OneFlowBase	{
 		$this->__addProperty("email","");
 		$this->__addProperty("misCode");
 		$this->__addProperty("amount", 0, "numeric"); 	//check this validation
-		$this->__addProperty("currency", "", false);
+		$this->__addProperty("currency");
 		$this->__addProperty("deliveryDate");			//check whether required in SKU Orders
 		$this->__addProperty("shipbyDate");			//check whether required in SKU Orders
 		$this->__addProperty("customerName","");
 		$this->__addProperty("purchaseOrderNumber");
 		$this->__addProperty("consolidatedInvoice");
 		$this->__addProperty("tax");
+		$this->__addProperty("instructions");
 
     }
 
@@ -75,6 +76,25 @@ class OneFlowOrderData extends OneFlowBase	{
 		$item->setSourceItemId($sourceItemId);
 		$item->setQuantity($quantity);
 		$item->setSKU($skuCode);
+
+		$this->items[] = $item;
+		return $item;
+	}
+
+	/**
+	 * newSourceProductIdItem function.
+	 *
+	 * @access public
+	 * @param string $sourceProductId
+	 * @param mixed $sourceItemId
+	 * @param integer $quantity
+	 * @return OneFlowItem
+	 */
+	public function newSourceProductIdItem($sourceProductId, $sourceItemId, $quantity = 1)	{
+		$item = new OneFlowItem();
+		$item->setSourceItemId($sourceItemId);
+		$item->setQuantity($quantity);
+		$item->setSourceProductId($sourceProductId);
 
 		$this->items[] = $item;
 		return $item;
@@ -196,6 +216,18 @@ class OneFlowOrderData extends OneFlowBase	{
 	 */
 	public function setExtraData($extraData)	{
 		$this->extraData = $extraData;
+	}
+
+	/**
+	 * setInstructions function.
+	 *
+	 * @access public
+	 * @param string $instructions
+	 * @return void
+	 */
+	public function setInstructions($instructions)
+	{
+		$this->instructions = $instructions;
 	}
 }
 
