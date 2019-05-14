@@ -21,17 +21,18 @@ class OneFlowComponent extends OneFlowBase	{
 		$this->__addProperty("type");
 		$this->__addProperty("code");
 		$this->__addProperty("path");
-		$this->__addProperty("barcode", "");
+		$this->__addProperty("barcode");
 		$this->__addProperty("fetch", false);
 		$this->__addProperty("localFile", false);
 		$this->__addProperty("preflight");
 		$this->__addProperty("preflightProfile");
 		$this->__addProperty("preflightProfileId");
-		$this->__addProperty("paper", "", false);
-		$this->__addProperty("weight", "", false);
-		$this->__addProperty("pages", "", false);
-		$this->__addProperty("width", "", false);
-		$this->__addProperty("height", "", false);
+		$this->__addProperty("paper" );
+		$this->__addProperty("weight" );
+		$this->__addProperty("pages" );
+		$this->__addProperty("width");
+		$this->__addProperty("height");
+		$this->__addProperty("duplicate");
 		$this->__addArray("attributes", null);
 		$this->__addArray("extraData", null);
     }
@@ -279,6 +280,17 @@ class OneFlowComponent extends OneFlowBase	{
     public function addAttribute($name, $value = null)	{
 	    $this->attributes[$name] = $value;
     }
+
+	/**
+	 * setDuplicate function.
+	 *
+	 * @access public
+	 * @param integer $duplicate
+	 * @return void
+	 */
+	public function setDuplicate($duplicate)	{
+		$this->duplicate = $duplicate;
+	}
 
 	/**
 	 * setExtraData function.

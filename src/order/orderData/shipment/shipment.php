@@ -30,6 +30,8 @@ class OneFlowShipment extends OneFlowBase {
 		$this->__addProperty("cost");
 		$this->__addProperty("slaDays");
 		$this->__addProperty("dispatchAlert");
+		$this->__addProperty("canShipEarly");
+		$this->__addProperty("shipByDate");
 	}
 
 	/**
@@ -39,13 +41,17 @@ class OneFlowShipment extends OneFlowBase {
 	 *
 	 * @param string        $path
 	 * @param null|string   $type
+	 * @param null|string   $contentType
+	 * @param null|boolean  $fetch
 	 *
 	 * @return \OneFlowAttachment
 	 */
-	public function newAttachment($path, $type = null)	{
+	public function newAttachment($path, $type = null, $contentType = null, $fetch = null)	{
 		$attachment = new OneFlowAttachment();
 		$attachment->setPath($path);
-		if($type) $attachment->setValue("type", $type);
+		if($type) $attachment->setType($type);
+		if($contentType) $attachment->setContentType($contentType);
+		if($fetch !== null) $attachment->setFetch($fetch);
 		$this->attachments[] = $attachment;
 		return end($this->attachments);
 	}
@@ -182,6 +188,30 @@ class OneFlowShipment extends OneFlowBase {
 	 */
 	public function setSlaDays($slaDays)      {
 		$this->slaDays = $slaDays;
+	}
+
+	/**
+	 * setCanShipEarly function.
+	 *
+	 * @access public
+	 * @param boolean $canShipEarly
+	 * @return void
+	 */
+	public function setCanShipEarly($canShipEarly)
+	{
+		$this->canShipEarly = $canShipEarly;
+	}
+
+	/**
+	 * setShipByDate function.
+	 *
+	 * @access public
+	 * @param string $shipByDate Using the format YYYY-MM-DD
+	 * @return void
+	 */
+	public function setShipByDate($shipByDate)
+	{
+		$this->shipByDate = $shipByDate;
 	}
 }
 

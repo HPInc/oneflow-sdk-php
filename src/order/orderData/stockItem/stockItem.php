@@ -17,6 +17,8 @@ class OneFlowStockItem extends OneFlowBase {
         $this->__addProperty("code");
         $this->__addProperty("quantity", 1, false);
         $this->__addProperty("shipmentIndex");
+        $this->__addProperty("name");
+        $this->__addProperty("unitPrice");
     }
 
     /**
@@ -63,6 +65,30 @@ class OneFlowStockItem extends OneFlowBase {
     public function setShipmentIndex($shipmentIndex)  {
         $this->shipmentIndex = $shipmentIndex;
     }
+
+	/**
+	 * setName function.
+	 *
+	 * @access public
+	 * @param string $name
+	 * @return void
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
+
+	/**
+	 * setUnitPrice function.
+	 *
+	 * @access public
+	 * @param number $unitPrice
+	 * @return void
+	 */
+	public function setUnitPrice($unitPrice)
+	{
+		$this->unitPrice = $unitPrice;
+	}
 }
 
 ?>
