@@ -17,12 +17,12 @@ $orderId = "##ORDER_ID##";
 $response = $client->orderCancel($orderId);
 
 
-if (isset($orderPost->error))	{
-	echo "Error Code     : ".$orderPost->error->code."\n";
-	echo "Error Message  : ".$orderPost->error->message."\n";
+if (isset($response->error))	{
+	echo "Error Code     : ".$response->error->code."\n";
+	echo "Error Message  : ".$response->error->message."\n";
 }	else	{
 
-	echo "OneFlow ID     : ".$orderPost->order->_id."\n";
+	echo "OneFlow ID     : ".$response->order->_id."\n";
 
 	print_r($response);
 }
