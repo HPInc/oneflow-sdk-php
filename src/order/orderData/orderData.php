@@ -140,7 +140,7 @@ class OneFlowOrderData extends OneFlowBase	{
 	 * @return boolean
 	 */
 	public function setPrintType($printType)	{
-		if (in_array($printType, $this->$printTypes))	{
+		if (in_array($printType, $this->printTypes))	{
 			$this->printType = $printType;
 		}	else	{
 			return false;

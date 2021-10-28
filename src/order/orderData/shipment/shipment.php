@@ -85,16 +85,18 @@ class OneFlowShipment extends OneFlowBase {
 	 * @param mixed $name
 	 * @param mixed $companyName
 	 * @param mixed $address1
-	 * @param string $address2 (default: "")
-	 * @param string $address3 (default: "")
+	 * @param string $address2
+	 * @param string $address3
 	 * @param mixed $town
-	 * @param string $state (default: "")
+	 * @param string $state
 	 * @param mixed $postcode
 	 * @param mixed $isoCountry
+	 * @param string $country (default: "")
 	 * @param string $phone (default: "")
+	 * @param string $email (default: "")
 	 * @return void
 	 */
-	public function setShipTo($name, $companyName, $address1, $address2="", $address3="", $town, $state="", $postcode, $isoCountry, $country="", $phone="", $email="")      {
+	public function setShipTo($name, $companyName, $address1, $address2, $address3, $town, $state, $postcode, $isoCountry, $country="", $phone="", $email="")      {
 		$this->shipTo->name = $name;
 		$this->shipTo->companyName = $companyName;
 		$this->shipTo->address1 = $address1;
@@ -116,17 +118,17 @@ class OneFlowShipment extends OneFlowBase {
 	 * @param mixed $name
 	 * @param mixed $companyName
 	 * @param mixed $address1
-	 * @param string $address2 (default: "")
-	 * @param string $address3 (default: "")
+	 * @param string $address2
+	 * @param string $address3
 	 * @param mixed $town
-	 * @param string $state (default: "")
+	 * @param string $state
 	 * @param mixed $postcode
 	 * @param mixed $isoCountry
 	 * @param mixed $country
 	 * @param mixed $phone
 	 * @return void
 	 */
-	public function setReturnAddress($name, $companyName, $address1, $address2="", $address3="", $town, $state="", $postcode, $isoCountry, $country="", $phone)      {
+	public function setReturnAddress($name, $companyName, $address1, $address2, $address3, $town, $state, $postcode, $isoCountry, $country, $phone)      {
 
 		$this->__addObject("returnAddress","Address");
 

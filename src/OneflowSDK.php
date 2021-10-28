@@ -42,8 +42,11 @@ class OneflowSDK {
 	protected $key;
 	protected $secret;
 	protected $client;
+	protected $retries;
+	protected $retryDelay;
+	protected $retryCondition;
 
-	public function __construct($url, $key, $secret){
+	public function __construct($url, $key, $secret, $options = null){
 		if(!$url || !$key || !$secret){
 			throw new Exception("Error creating sdk instance. Url, key and secret are required", 1);
 		}
@@ -53,6 +56,9 @@ class OneflowSDK {
 		$this->apiName = "connect";
 		$this->version = "0.1";
 		$this->authHeader = "x-oneflow-authorization";
+		$this->retries = $options->retries ?: 3;
+		$this->retryCondition = $options->retryCondition ?: "OneflowSDK::isRetryableError";
+		$this->retryDelay = $options->retryDelay ?: "OneflowSDK::exponentialDelay";
 	}
 
 	//ACCOUNTS
@@ -264,14 +270,24 @@ class OneflowSDK {
 			$params['http']['header'][] = "$name: $value";
 		}
 
-		$context = stream_context_create($params);
-		$fp = fopen($url, 'rb', false, $context);
-		if (!$fp)	{
-			throw new Exception("Problem creating stream from $url, \n\t".implode("\n\t", error_get_last()));
-		}
+		$attempt = 0;
+		while ($attempt < $this->retries) {
+			$context = stream_context_create($params);
+			$fp = fopen($url, 'rb', false, $context);
+			if (!$fp)	{
+				throw new Exception("Problem creating stream from $url, \n\t".implode("\n\t", error_get_last()));
+			}
+			
+			$response = stream_get_contents($fp);
+			if ($response === false)	throw new Exception("Problem reading data from $url, $php_errormsg");
 
-		$response = stream_get_contents($fp);
-		if ($response === false)	throw new Exception("Problem reading data from $url, $php_errormsg");
+			preg_match('{HTTP\/\S*\s(\d{3})}', $http_response_header[0], $match);
+			$status = $match[1];
+
+			if (!call_user_func($this->retryCondition, $status, $method, $path)) break;
+			$attempt++;
+			call_user_func($this->retryDelay, $attempt, $status);
+		}
 
 		return $response;
 	}
@@ -416,5 +432,33 @@ class OneflowSDK {
 	private function token($method, $path, $timestamp){
 		$stringToSign = strtoupper($method) . ' ' . $path . ' ' . $timestamp;
 		return $this->key . ':' . hash_hmac('sha1', $stringToSign, $this->secret);
+	}
+
+	/**
+	 * Delay function.
+	 *
+	 * @access private
+	 * @param mixed $attempt
+	 * @param mixed $status
+	 * @return void
+	 */
+	private static function exponentialDelay($attempt, $status) {
+		$coefficient = ($status === '429') ? (300 * 60) : 100; // assume 429 limit by minute
+		$delay = pow(2, $attempt) * $coefficient;
+		$randomSum = $delay * 0.04 * random_int(0, 10); // 0-40% of the delay
+		usleep(($delay + $randomSum) * 1000);
+	}
+
+	/**
+	 * Retry function.
+	 *
+	 * @access private
+	 * @param mixed $status
+	 * @param mixed $method
+	 * @param mixed $path
+	 * @return boolean Indicating whether to retry
+	 */
+	private static function isRetryableError($status, $method, $path) {
+		return $status === '429';
 	}
 }
