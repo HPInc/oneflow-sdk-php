@@ -100,10 +100,10 @@ final class OneflowOrderTest extends TestCase
 		$shipment->setSlaDays(5);
 		$shipment->setCanShipEarly(false);
 		$shipment->setShipByDate('2019-04-01');
-		$shipment->setCarrierFields({
-			'carrierField1' => 'carrierField1',
-			'carrierField2' => 'carrierField2'
-		});
+		$shipment->setCarrierFields([
+			'carrierField1' => 'carrierValue1',
+			'carrierField2' => 'carrierValue2'
+		]);
 
 
 		$item->setShipment($shipment);
@@ -239,6 +239,10 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals('insert', $outputAttachment->type);
 		$this->assertEquals('application/pdf', $outputAttachment->contentType);
 		$this->assertEquals(false, $outputAttachment->fetch);
+
+		$this->assertObjectHasAttribute('carrierFeilds', $outputShipment);
+		$this->assertEquals('carrierValue1', $outputShipment->carrierFields->carrierField1);
+		$this->assertEquals('carrierValue2', $outputShipment->carrierFields->carrierField2);
 
 	}
 }
