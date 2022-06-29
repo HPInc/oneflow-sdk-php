@@ -32,6 +32,7 @@ class OneFlowShipment extends OneFlowBase {
 		$this->__addProperty("dispatchAlert");
 		$this->__addProperty("canShipEarly");
 		$this->__addProperty("shipByDate");
+		$this->__addObject("carrierFields", null);
 	}
 
 	/**
@@ -214,6 +215,17 @@ class OneFlowShipment extends OneFlowBase {
 	public function setShipByDate($shipByDate)
 	{
 		$this->shipByDate = $shipByDate;
+	}
+
+	/**
+	 * setCarrierFields function.
+	 *
+	 * @access public
+	 * @param mixed $carrierFields
+	 * @return void
+	 */
+	public function setCarrierFields($carrierFields)	{
+		$this->carrierFields = $carrierFields;
 	}
 }
 

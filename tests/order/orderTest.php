@@ -100,6 +100,10 @@ final class OneflowOrderTest extends TestCase
 		$shipment->setSlaDays(5);
 		$shipment->setCanShipEarly(false);
 		$shipment->setShipByDate('2019-04-01');
+		$shipment->setCarrierFields({
+			'carrierField1' => 'carrierField1',
+			'carrierField2' => 'carrierField2'
+		});
 
 
 		$item->setShipment($shipment);
