@@ -240,7 +240,7 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals('application/pdf', $outputAttachment->contentType);
 		$this->assertEquals(false, $outputAttachment->fetch);
 
-		$this->assertObjectHasAttribute('carrierFeilds', $outputShipment);
+		$this->assertObjectHasAttribute('carrierFields', $outputShipment);
 		$this->assertEquals('carrierValue1', $outputShipment->carrierFields->carrierField1);
 		$this->assertEquals('carrierValue2', $outputShipment->carrierFields->carrierField2);
 
