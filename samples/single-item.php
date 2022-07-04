@@ -27,6 +27,10 @@ $orderData->setEmail("CUTSOMER-EMAIL-GOES-HERE");
 $shipment = $orderData->newShipment();
 $shipment->setShipTo("NAME","COMPANY-NAME", "ADDRESS1","ADDRESS2","ADDRESS3","TOWN/CITY","STATE","POSTCODE/ZIP","ISO-COUNTRY-CODE","COUNTRY-NAME", "PHONE", "EMAIL");
 $shipment->setCarrier("CARRIER-CODE","CARRIER-SERVICE");
+$shipment->setCarrierFields([
+	'carrierField1' => 'carrierValue1',
+	'carrierField2' => 'carrierValue2'
+]);
 
 //CREATE AN ITEM
 $item = $orderData->newSKUItem("YOUR-SKU-CODE", "YOUR-ITEM-ID", QUANTITY);
