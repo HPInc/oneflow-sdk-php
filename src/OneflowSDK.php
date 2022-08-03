@@ -58,7 +58,7 @@ class OneflowSDK {
 		$this->authHeader = "x-oneflow-authorization";
 		$this->retries = isset($options->retries) ? $options->retries : 3;
 		$this->retryCondition = isset($options->retryCondition) ? $options->retryCondition : "OneflowSDK::isRetryableError";
-		$this->retryDelay = isset($options->retryDelay) ? $options->retryDelay : "OneflowSDK::exponentialDelay";	
+		$this->retryDelay = isset($options->retryDelay) ? $options->retryDelay : "OneflowSDK::exponentialDelay";
 	}
 
 	//ACCOUNTS
