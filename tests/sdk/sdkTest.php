@@ -55,7 +55,7 @@ final class OneflowSDKTest extends TestCase
     public function testDefaultRetryFunctionsAreCalledOnError()
 	{
         $client = new OneflowSDK(
-            'https://pro-api-dev.oneflowcloud.com/api',
+            'https://pro-api.oneflowcloud.com/api',
             'token',
             'secret'
         );
@@ -72,7 +72,7 @@ final class OneflowSDKTest extends TestCase
         $retryCondition->expects($this->once())->method('retryCondition')->will($this->returnValue(true));
         
         $client = new OneflowSDK(
-            'https://pro-api-dev.oneflowcloud.com/api',
+            'https://pro-api.oneflowcloud.com/api',
             'token',
             'secret',
             (object)['retries' => 1, 'retryDelay' => array($retryDelay, 'retryDelay'), 'retryCondition' =>  array($retryCondition, 'retryCondition')]
