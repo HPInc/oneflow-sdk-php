@@ -16,7 +16,7 @@ $retryCondition = function ($status, $method, $path) {
 
 //SETUP THE SDK
 $client = new OneflowSDK(
-	'http://localhost:3000/api',
+	'https://localhost:3000/api',
 	'API_TOKEN_HERE',
 	'API_SECRET_HERE',
 	(object)['retries' => 2, 'retryDelay' => $retryDelay, 'retryCondition' => $retryCondition]
