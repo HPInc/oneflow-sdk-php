@@ -264,6 +264,7 @@ class OneflowSDK {
 		}
 
 		$params['http']['header'][] = "x-oneflow-date: $timestamp";
+		$params['http']['header'][] = "x-oneflow-algorithm: SHA256";
 		$params['http']['header'][] = $this->authHeader.": ".$this->token($method, $fullPath, $timestamp);
 
 		foreach ($optional_headers as $name => $value)	{
@@ -431,7 +432,7 @@ class OneflowSDK {
 	 */
 	private function token($method, $path, $timestamp){
 		$stringToSign = strtoupper($method) . ' ' . $path . ' ' . $timestamp;
-		return $this->key . ':' . hash_hmac('sha1', $stringToSign, $this->secret);
+		return $this->key . ':' . hash_hmac('sha256', $stringToSign, $this->secret);
 	}
 
 	/**
