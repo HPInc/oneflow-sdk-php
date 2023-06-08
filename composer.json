@@ -1,13 +1,13 @@
 {
   "name": "oneflow/php-sdk",
-  "description": "PHP SDK for OneFlow",
+  "description": "PHP SDK for Site Flow",
   "minimum-stability": "stable",
-  "license": "proprietary",
-  "homepage": "http://www.oneflowsystems.com/",
+  "license": "MIT",
+  "homepage": "https://hpsiteflow.com/",
   "authors": [
     {
-      "name": "Nigel Watson",
-      "email": "nigel.watson@oneflowsystems.com"
+      "name": "HP Inc.",
+      "email": "joseandres.puertas@hp.com"
     }
   ],
   "autoload": {
