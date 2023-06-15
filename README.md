@@ -1,4 +1,4 @@
-# PHP SDK for OneFlow #
+# PHP SDK for HP Site Flow #
 
 ## Installation instructions ##
  
@@ -17,12 +17,12 @@ Or run this command in your terminal
 
 ### Git ###
     
-    git clone https://github.com/Oneflow/oneflow-sdk-php <your-target-directory>
+    git clone https://github.com/HPInc/oneflow-sdk-php <your-target-directory>
     
 ### Manually ###
 
-Download the .zip file of this project and unzip it in the desire location. [Download the last zip here](https://github.com/Oneflow/oneflow-sdk-php/archive/master.zip)
+Download the .zip file of this project and unzip it in the desire location. [Download the last zip here](https://github.com/HPInc/oneflow-sdk-php/archive/master.zip)
 
 ## Samples ##
 
-You can find a lot of samples [here](https://github.com/Oneflow/oneflow-sdk-php/tree/master/samples).
+You can find a lot of samples [here](samples).
