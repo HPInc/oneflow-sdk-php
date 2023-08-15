@@ -18,6 +18,7 @@ class OneFlowComponent extends OneFlowBase	{
 	 */
 	public function init()      {
 		$this->__addProperty("componentId");
+		$this->__addProperty("sourceComponentId");
 		$this->__addProperty("type");
 		$this->__addProperty("code");
 		$this->__addProperty("path");
@@ -267,6 +268,17 @@ class OneFlowComponent extends OneFlowBase	{
      */
     public function setComponentId($componentId)	{
 	    $this->componentId = $componentId;
+    }
+
+    /**
+     * setSourceComponentId function.
+     *
+     * @access public
+     * @param mixed $sourceComponentId
+     * @return void
+     */
+    public function setSourceComponentId($sourceComponentId)	{
+	    $this->sourceComponentId = $sourceComponentId;
     }
 
     /**

@@ -32,6 +32,7 @@ final class OneflowOrderTest extends TestCase
 		]);
 
 		$component = $item->newComponent('componentCode');
+		$component->setSourceComponentId('my-source-component-id');
 		$component->setFetchUrl('http://site.com/file.pdf');
 		$component->setLocalFile(false);
 		$component->setBarcode('customComponentBarcode');
@@ -151,6 +152,7 @@ final class OneflowOrderTest extends TestCase
 		$this->assertEquals(1, count($outputItem->components));
 		$outputComponent = $outputItem->components[0];
 		$this->assertEquals('componentCode', $outputComponent->code);
+		$this->assertEquals('my-source-component-id', $outputComponent->sourceComponentId);
 		$this->assertEquals('http://site.com/file.pdf', $outputComponent->path);
 		$this->assertEquals('customComponentBarcode', $outputComponent->barcode);
 		$this->assertEquals(true, $outputComponent->fetch);
