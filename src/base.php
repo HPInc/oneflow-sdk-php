@@ -15,6 +15,7 @@ class OneFlow {
 /**
  * OneFlowBase class.
  */
+#[AllowDynamicProperties]
 class OneFlowBase	{
 
 	private $__children = Array();

@@ -35,6 +35,7 @@ $loader = new OneFlowSDKLoader();
 /**
  * OneflowSDK class.
  */
+#[AllowDynamicProperties]
 class OneflowSDK {
 
 	protected $url;
