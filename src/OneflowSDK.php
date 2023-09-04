@@ -431,7 +431,7 @@ class OneflowSDK {
 	 * @return string
 	 */
 	private function token($method, $path, $timestamp){
-		$stringToSign = strtoupper($method) . ' ' . $path . ' ' . $timestamp;
+		$stringToSign = strtoupper($method) . ' ' . urldecode($path) . ' ' . $timestamp;
 		return $this->key . ':' . hash_hmac('sha256', $stringToSign, $this->secret);
 	}
 
