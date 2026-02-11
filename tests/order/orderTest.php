@@ -18,6 +18,7 @@ final class OneflowOrderTest extends TestCase
 			'param1' => 'value1',
 			'param2' => 'value2'
 		]);
+        $orderData->setTags(['123', '345']);
 
 		$item = $orderData->newSKUItem('skuCode', 'itemId', 5);
 		$item->setPrintQuantity(1);

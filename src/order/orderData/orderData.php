@@ -48,6 +48,7 @@ class OneFlowOrderData extends OneFlowBase	{
 		$this->__addProperty("consolidatedInvoice");
 		$this->__addProperty("tax");
 		$this->__addProperty("instructions");
+		$this->__addProperty("tags");
 
     }
 
@@ -228,6 +229,16 @@ class OneFlowOrderData extends OneFlowBase	{
 	public function setInstructions($instructions)
 	{
 		$this->instructions = $instructions;
+	}
+
+    /**
+     * @access public
+     * @param mixed $tags
+     * @return void
+     */
+	public function setTags($tags)
+	{
+		$this->tags = $tags;
 	}
 }
 
