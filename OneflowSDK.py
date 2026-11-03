@@ -5,10 +5,14 @@ __author__ = "HPInc."
 import requests, hmac, hashlib, datetime
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-from urllib.parse import unquote
+from urllib.parse import unquote, urlsplit
 
 class OneflowSDK:
     def __init__(self, url, token, secret, options=None):
+        parsed_url = urlsplit(url)
+        if parsed_url.scheme.lower() != "https" or not parsed_url.hostname:
+            raise ValueError("OneflowSDK requires an HTTPS URL")
+
         self.url = url
         self.token = token
         self.secret = secret
@@ -56,5 +60,12 @@ class OneflowSDK:
         url = self.url + path
         headers = self.create_headers(method, path)
         session = self.requests_retry_session()
-        result = session.request(method, url, data=data, params=params, headers=headers)
+        result = session.request(
+            method,
+            url,
+            data=data,
+            params=params,
+            headers=headers,
+            allow_redirects=False,
+        )
         return result.content
