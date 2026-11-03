@@ -85,6 +85,9 @@ class cComponent	{
     public $weight;
     public $pages;
     public $ticketTemplate;
+    public $colour;
+    public $finish;
+    public $route;
     
     function __construct(){
 	    $this->colour = new cColour();
@@ -104,6 +107,7 @@ class cProduct	{
     public $bulkQuantity;
     public $unitWeight;
     public $productCode;
+    public $components;
     
     function __construct(){
 	    $this->imposedInternally = false;
