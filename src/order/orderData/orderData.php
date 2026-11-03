@@ -12,6 +12,69 @@ require_once "shipment/shipment.php";
  */
 class OneFlowOrderData extends OneFlowBase	{
 
+	public $shipments;
+	public $items;
+	public $stockItems;
+	public $error;
+	public $extraData;
+	public $printType;
+	public $sourceOrderId;
+	public $status;
+	public $read;
+	public $inqueue;
+	public $counter;
+	public $slaTimestamp;
+	public $date;
+	public $clientTimeZoneMinuts;
+	public $email;
+	public $misCode;
+	public $amount;
+	public $currency;
+	public $deliveryDate;
+	public $shipbyDate;
+	public $customerName;
+	public $purchaseOrderNumber;
+	public $consolidatedInvoice;
+	public $tax;
+	public $instructions;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->shipments);
+		unset($this->items);
+		unset($this->stockItems);
+		unset($this->error);
+		unset($this->extraData);
+		unset($this->printType);
+		unset($this->sourceOrderId);
+		unset($this->status);
+		unset($this->read);
+		unset($this->inqueue);
+		unset($this->counter);
+		unset($this->slaTimestamp);
+		unset($this->date);
+		unset($this->clientTimeZoneMinuts);
+		unset($this->email);
+		unset($this->misCode);
+		unset($this->amount);
+		unset($this->currency);
+		unset($this->deliveryDate);
+		unset($this->shipbyDate);
+		unset($this->customerName);
+		unset($this->purchaseOrderNumber);
+		unset($this->consolidatedInvoice);
+		unset($this->tax);
+		unset($this->instructions);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 *

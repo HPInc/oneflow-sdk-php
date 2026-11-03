@@ -11,6 +11,45 @@ require_once "attachments/attachments.php";
  */
 class OneFlowShipment extends OneFlowBase {
 
+	public $shipTo;
+	public $carrier;
+	public $attachments;
+	public $shipmentIndex;
+	public $pspBranding;
+	public $labelName;
+	public $cost;
+	public $slaDays;
+	public $dispatchAlert;
+	public $canShipEarly;
+	public $shipByDate;
+	public $carrierFields;
+	public $returnAddress;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->shipTo);
+		unset($this->carrier);
+		unset($this->attachments);
+		unset($this->shipmentIndex);
+		unset($this->pspBranding);
+		unset($this->labelName);
+		unset($this->cost);
+		unset($this->slaDays);
+		unset($this->dispatchAlert);
+		unset($this->canShipEarly);
+		unset($this->shipByDate);
+		unset($this->carrierFields);
+		unset($this->returnAddress);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 *

@@ -10,6 +10,29 @@ require_once "orderData/orderData.php";
  */
 class OneFlowOrder extends OneFlowBase	{
 
+	public $orderData;
+	public $destination;
+	public $source;
+	public $files;
+	public $_id;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->orderData);
+		unset($this->destination);
+		unset($this->source);
+		unset($this->files);
+		unset($this->_id);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 *
