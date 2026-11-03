@@ -7,6 +7,29 @@
  */
 class OneFlowStockItem extends OneFlowBase {
 
+	public $code;
+	public $quantity;
+	public $shipmentIndex;
+	public $name;
+	public $unitPrice;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->code);
+		unset($this->quantity);
+		unset($this->shipmentIndex);
+		unset($this->name);
+		unset($this->unitPrice);
+
+		parent::__construct($values);
+	}
+
     /**
      * init function.
      *

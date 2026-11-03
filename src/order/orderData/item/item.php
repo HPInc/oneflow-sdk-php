@@ -9,6 +9,53 @@ require_once "component/component.php";
  */
 class OneFlowItem extends OneFlowBase {
 
+	public $components;
+	public $description;
+	public $shipmentIndex;
+	public $sourceItemId;
+	public $sku;
+	public $sourceProductId;
+	public $quantity;
+	public $printQuantity;
+	public $barcode;
+	public $dispatchAlert;
+	public $unitWeight;
+	public $unitCost;
+	public $unitPrice;
+	public $extraData;
+	public $colour;
+	public $binding;
+	public $folding;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->components);
+		unset($this->description);
+		unset($this->shipmentIndex);
+		unset($this->sourceItemId);
+		unset($this->sku);
+		unset($this->sourceProductId);
+		unset($this->quantity);
+		unset($this->printQuantity);
+		unset($this->barcode);
+		unset($this->dispatchAlert);
+		unset($this->unitWeight);
+		unset($this->unitCost);
+		unset($this->unitPrice);
+		unset($this->extraData);
+		unset($this->colour);
+		unset($this->binding);
+		unset($this->folding);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 *

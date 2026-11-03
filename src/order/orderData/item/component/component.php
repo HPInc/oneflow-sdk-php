@@ -10,6 +10,61 @@ require_once "colour/colour.php";
  */
 class OneFlowComponent extends OneFlowBase	{
 
+	public $componentId;
+	public $sourceComponentId;
+	public $type;
+	public $code;
+	public $path;
+	public $barcode;
+	public $fetch;
+	public $localFile;
+	public $preflight;
+	public $preflightProfile;
+	public $preflightProfileId;
+	public $paper;
+	public $weight;
+	public $pages;
+	public $width;
+	public $height;
+	public $duplicate;
+	public $attributes;
+	public $extraData;
+	public $finish;
+	public $colour;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->componentId);
+		unset($this->sourceComponentId);
+		unset($this->type);
+		unset($this->code);
+		unset($this->path);
+		unset($this->barcode);
+		unset($this->fetch);
+		unset($this->localFile);
+		unset($this->preflight);
+		unset($this->preflightProfile);
+		unset($this->preflightProfileId);
+		unset($this->paper);
+		unset($this->weight);
+		unset($this->pages);
+		unset($this->width);
+		unset($this->height);
+		unset($this->duplicate);
+		unset($this->attributes);
+		unset($this->extraData);
+		unset($this->finish);
+		unset($this->colour);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 *

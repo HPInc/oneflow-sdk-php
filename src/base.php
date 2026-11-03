@@ -15,7 +15,6 @@ class OneFlow {
 /**
  * OneFlowBase class.
  */
-#[AllowDynamicProperties]
 class OneFlowBase	{
 
 	private $__children = Array();
@@ -224,7 +223,7 @@ class OneFlowBase	{
 	 * @return void
 	 */
 	public function setValue($name, $value)	{
-		if (property_exists($this, $name))	$this->$name = $value;
+		if (array_key_exists($name, get_object_vars($this)))	$this->$name = $value;
 	}
 
 	/**

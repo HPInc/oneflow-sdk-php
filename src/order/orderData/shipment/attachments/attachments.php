@@ -7,6 +7,27 @@
  */
 class OneFlowAttachment extends OneFlowBase {
 
+	public $path;
+	public $type;
+	public $contentType;
+	public $fetch;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->path);
+		unset($this->type);
+		unset($this->contentType);
+		unset($this->fetch);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 *

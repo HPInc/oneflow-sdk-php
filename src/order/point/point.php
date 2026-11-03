@@ -7,6 +7,23 @@
  */
 class OneFlowPoint extends OneFlowBase	{
 
+	public $id;
+	public $name;
+
+	/**
+	 * __construct function.
+	 *
+	 * @access public
+	 * @param mixed $values (default: null)
+	 */
+	public function __construct($values=null)	{
+		//keep the existing fields absent until init or a setter assigns them
+		unset($this->id);
+		unset($this->name);
+
+		parent::__construct($values);
+	}
+
 	/**
 	 * init function.
 	 * 
